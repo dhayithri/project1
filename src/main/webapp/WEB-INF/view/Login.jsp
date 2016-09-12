@@ -7,11 +7,16 @@
 <title>Login</title>
 </head>
 <body>
-This is Login page
-<br>
-Enter User Name:<input type ="text"> <br>
-Enter Password :<input type ="password"> <br>
-<input type="submit" value="Login">
+<form action="action_page.php">
+  First name:<br>
+  <input type="text" name="firstname">
+  <br>
+  Last name:<br>
+  <input type="text" name="lastname" >
+  <br><br>
+  <input type="submit" value="Login">
+</form>
+
 
 </body>
 </html>

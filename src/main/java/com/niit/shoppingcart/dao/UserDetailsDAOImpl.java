@@ -58,6 +58,7 @@ public   class UserDetailsDAOImpl  implements UserDetailsDAO{
 			}
 			
 	}
+	@Transactional
 		public UserDetails get(String id){
 			// select* from category where id='101'
 			String hql = "from UserDetails where id="+"'"+id+"'";

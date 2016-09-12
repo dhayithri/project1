@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.model.Supplier;
-public   class SupplierDAOImpl  implements SupplierDAO{
+
+public  class SupplierDAOImpl  implements SupplierDAO{
 	@Autowired
 	private SessionFactory sessionFactory;
 	public SupplierDAOImpl(SessionFactory sessionFactory)
@@ -54,9 +55,10 @@ public   class SupplierDAOImpl  implements SupplierDAO{
 			
 	}
 	@Transactional
-		public Supplier get(String id){
+		public Supplier get(int id){
 			// select* from category where id='101'
 			String hql = "from Supplier where id="+"'"+id+"'";
+			@SuppressWarnings("rawtypes")
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			@SuppressWarnings("unchecked")
 			List<Supplier> list = query.list();
@@ -66,13 +68,12 @@ public   class SupplierDAOImpl  implements SupplierDAO{
 				return list.get(0);
 			}
 		}
-	@Transactional
+		@Transactional
 		@SuppressWarnings("unchecked")
 		public List<Supplier> list() {
 			String hql = "from Supplier";
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			return query.list();
 		}
-			
-			
+		
 		}

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.model.Category;
+import com.niit.model.Supplier;
+
 
 @EnableTransactionManagement
 @Repository("categoryDAO")
@@ -25,7 +27,7 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 	//save or update - if the record exist, it will update
 	//                 - if the record does not exist it will create
 	@Transactional
-	public boolean save(Category category){
+	public boolean saveOrUpdate(Category category){
 		try {
 		sessionFactory.getCurrentSession().save(category);
 		return true;
@@ -35,7 +37,7 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 		}
 		
 	}
-	@Transactional
+	/***@Transactional
 	public boolean update(Category category){
 		try {
 		sessionFactory.getCurrentSession().update(category);
@@ -44,7 +46,8 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 			e.printStackTrace();
 			return false;
 		}
-	}
+	}**/
+	
 	@Transactional
 		public boolean delete(Category category){
 			try {
@@ -56,11 +59,12 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 			}
 			
 	}
-		public Category get(String id){
+	@Transactional
+		public Category get(int id){
 			// select* from category where id='101'
 			String hql = "from Category where id="+"'"+id+"'";
 			
-			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			Query<Category> query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 			List<Category> list = query.list();
 			if(list==null){
@@ -69,14 +73,14 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 				return list.get(0);
 			}
 		}
+		
+	@SuppressWarnings("deprecation")
 	@Transactional
-		@SuppressWarnings("deprecation")
 		public List<Category> list() {
 			String hql = "from Category";
-			@SuppressWarnings("rawtypes")
-			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			Query<Category> query = sessionFactory.getCurrentSession().createQuery(hql);
 			return query.list();
 		}
-			
-			
-		}
+}
+
+

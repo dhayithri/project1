@@ -1,5 +1,5 @@
 package com.niit.controller;
-
+/******
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,7 @@ public class AdminController {
 	
 	@RequestMapping("/manageCategories")
 	public ModelAndView categories(){
-		ModelAndView mv= new ModelAndView("/home");
+		ModelAndView mv= new ModelAndView("/Home");
 		mv.addObject("category",category);
 		mv.addObject("isAdminClickedCategories","true");
 		mv.addObject("categoryList",categoryDAO.list());
@@ -37,7 +37,7 @@ public class AdminController {
 	}
 	@RequestMapping("/manageProducts")
 	public ModelAndView products(){
-		ModelAndView mv= new ModelAndView("/home");
+		ModelAndView mv= new ModelAndView("/Home");
 		mv.addObject("product",product);
 		mv.addObject("isAdminClickedProducts","true");
 		mv.addObject("productList",productDAO.list());
@@ -45,11 +45,27 @@ public class AdminController {
 	}
 	@RequestMapping("/manageSuppliers")
 	public ModelAndView suppliers(){
-		ModelAndView mv= new ModelAndView("/home");
+		ModelAndView mv= new ModelAndView("/Home");
 		mv.addObject("supplier",supplier);
 		mv.addObject("isAdminClickedSuppliers","true");
 		mv.addObject("supplierList",supplierDAO.list());
 		return mv;
 	}
 	
+}***/
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class AdminController {
+	@RequestMapping(value ="/Admin" )
+	public ModelAndView SupplierPage() {
+		ModelAndView mv= new ModelAndView("/Admin");
+		mv.addObject("UserClickedadmin", "true");
+		return mv;
 }
+}
+

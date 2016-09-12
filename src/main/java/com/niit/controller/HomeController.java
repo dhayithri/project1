@@ -19,6 +19,7 @@ public class HomeController {
 	@Autowired
 	CategoryDAO categoryDAO;
 	
+	
 	/*@RequestMapping("/")
 	public String homePage()
 	{
@@ -30,7 +31,7 @@ public class HomeController {
 	{
     	//log.debug("Starting of the method onLoad");
 		ModelAndView mv= new ModelAndView("Home");
-		mv.addObject("message","Thank you for visiting this ShoppingCart");
+		//mv.addObject("message","Thank you for visiting this ShoppingCart");
 		//session.setAttribute("category", category);
 		//session.setAttribute("categoryList",categoryDAO.list());
 		//List<Category> categoryList= categoryDAO.list(); 
@@ -39,14 +40,15 @@ public class HomeController {
 		//log.debud("Ending of the method onLoad");
 		return mv;
    	}
-		@RequestMapping("/Register")
-		public ModelAndView register()
+		@RequestMapping("/Registration")
+		public ModelAndView registration()
 		{
-			ModelAndView mv= new ModelAndView("Register");
+			ModelAndView mv= new ModelAndView("Registration");
 			mv.addObject("userClickedRegistrationHere","true");
-			return mv;
-			
+			return mv;	
 	    }
+		
+		
 		@RequestMapping("/Login")
 		public ModelAndView login()
 		{
