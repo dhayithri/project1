@@ -5,6 +5,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <style>
+ h3{
+    text-align: center;
+    }
+ table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: purple;
+    color: white;
+}
+</style>
+
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<c:url value="/resources/table1.css" />">
@@ -12,8 +34,10 @@
 <title>Product</title>
 </head>
 <body>
+<h3>Product</h3>
+
 	<div class="text-center myForm">
-		<c:url var="action" value="editproduct"></c:url>
+		<c:url var="action" value="updateproduct"></c:url>
 		<form:form action="${action}" modelAttribute="product"
 			enctype="multipart/form-data" method="post">
 			<table>
@@ -65,10 +89,11 @@
 		</form:form>
 	</div>
 	<div align="center">
-		<table class="table1" style="width: 80%">
+		<table class="table1" style="width: 100%">
 			<caption>Products</caption>
 			<thead>
-				<tr id="tr1">
+			
+				 <tr id="tr1">
 					<th>Product Id</th>
 					<th>Product Name</th>
 					<th>Product Description</th>
@@ -93,10 +118,12 @@
 								<img height="100px" width="100px" alt="${product.id }"
 									src="<c:url value="/resources/images/${product.id }.jpg"></c:url>">
 							</div>
-						<td id="td1"><a href="addeditproduct/${product.id }"><img
-								alt="Edit" src="C:\images\edit1.jpg"></a>
-						<td id="td1"><a href="adddeleteproduct/${product.id }"><img
-								alt="Delete" src="C:\images\del1.jpg"></a>
+						<td id="td1"><a href="addupdateproduct/${product.id }"class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-edit"></span> Edit
+								</a>
+						<td id="td1"><a href="adddeleteproduct/${product.id }"class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-trash"></span> Delete
+        </a>
 					</tr>
 				</c:forEach>
 			</tbody>

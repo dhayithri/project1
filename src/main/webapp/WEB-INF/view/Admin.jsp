@@ -28,9 +28,15 @@ ${message}
        <li><a class="active" href="Supplier">Supplier</a></li>
       <li><a href="Product">Product</a></li>
       <li><a href="Category">Category</a></li>
+       
     </ul>
   </div>
 </nav>
+${msg}
+${msg1 }
+<h1>Welcome Admin</h1>
+<div align="right"><a href=<c:url value="perform_logout"/>>logout</a></div>
+
 <c:choose>
 <c:when test="${UserClickedSupplier}">
 <c:import url="/WEB-INF/view/Supplier.jsp"></c:import>

@@ -1,94 +1,119 @@
 package com.niit.shoppingcart.dao;
 
+
 import java.util.List;
-import org.hibernate.HibernateException;
+
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.model.UserDetails;
 
 
-@EnableTransactionManagement
+
+@SuppressWarnings("deprecation")
 @Repository("userDetailsDAO")
-public   class UserDetailsDAOImpl  implements UserDetailsDAO{
+public class UserDetailsDAOImpl implements UserDetailsDAO {
 	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	public UserDetailsDAOImpl(SessionFactory sessionFactory)
-	{
+
+
+	public UserDetailsDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	//save -save the record - if the record exist it will throw error
-	//update - update the record - if the record does not exist, it will throw error
-	//save or update - if the record exist, it will update
-	//                 - if the record does not exist it will create
+
 	@Transactional
-	public boolean save(UserDetails userDetails){
-		try {
-		sessionFactory.getCurrentSession().save(userDetails);
-		return true;
-		} catch(HibernateException e){
-			e.printStackTrace();
-			return false;
-		}
-		
+	public List<UserDetails> list() {
+		@SuppressWarnings("unchecked")
+		List<UserDetails> listUser = (List<UserDetails>) sessionFactory.getCurrentSession()
+				.createCriteria(UserDetails.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		return listUser;
+	}
+
+	@Transactional
+	public void saveOrUpdate(UserDetails user) {
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
+	
 	}
 	@Transactional
-	public boolean update(UserDetails userDetails){
-		try {
-		sessionFactory.getCurrentSession().update(userDetails);
-		return true;
-		} catch(HibernateException e){
-			e.printStackTrace();
-			return false;
-		}
+	public void delete(int id) {
+		UserDetails UserToDelete = new UserDetails();
+		UserToDelete.setUserId(id);
+		sessionFactory.getCurrentSession().delete(UserToDelete);
 	}
+
 	@Transactional
-		public boolean delete(UserDetails userdetails){
-			try {
-			sessionFactory.getCurrentSession().delete(userdetails);
-			return true;
-			} catch(HibernateException e){
-				e.printStackTrace();
-				return false;
-			}
-			
-	}
-	@Transactional
-		public UserDetails get(String id){
-			// select* from category where id='101'
-			String hql = "from UserDetails where id="+"'"+id+"'";
-			Query query = sessionFactory.getCurrentSession().createQuery(hql);
-			@SuppressWarnings("unchecked")
-			List<UserDetails> list = query.list();
-			if(list==null){
-				return null;
-			} else {
-				return list.get(0);
-			}
-		}
-		@Transactional
-		public UserDetails isValidUser(String id,String password){
-			String hql = "from UserDetails where id ='" + id +"'and password= '"+password +"'";
-			Query query= sessionFactory.getCurrentSession().createQuery(hql);
-			List<UserDetails> list = query.list();
-			if(list== null) {
-				return null;
-			}else{
-				return list.get(0);
-			}
-		}
+	public UserDetails get(int id) {
+		String hql = "from"+" UserDetails"+" where userId="+id;
+		@SuppressWarnings("rawtypes")
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
 		@SuppressWarnings("unchecked")
-		public List<UserDetails> list() {
-			String hql = "from UserDetails";
-			Query query = sessionFactory.getCurrentSession().createQuery(hql);
-			return query.list();
+		List<UserDetails> listUser = (List<UserDetails>) query.list();
+		
+		if (listUser != null && !listUser.isEmpty()) {
+			return listUser.get(0);
 		}
-			
-			
+		return null;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Transactional
+	public boolean isValidUser(String userName, String password) {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(UserDetails.class);
+		c.add(Restrictions.eq("userName",userName));
+		c.add(Restrictions.eq("password",password));
+		
+		List list = c.list();
+		if(list==null || list.isEmpty())
+		{
+			return false;
 		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	/*@SuppressWarnings("rawtypes")
+	@Transactional
+	public boolean isValidUser(String userName, String password) {
+		String hql="from"+  "UserDetails"  +  "where userName=" +"'"+ userName + "'"+ "and password ="+"'"+ password + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<UserDetails> list = (List<UserDetails>) query.list();
+		if(list==null || list.isEmpty())
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}*/
+
+	@Transactional
+	public UserDetails get(String userName) {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(UserDetails.class);
+		c.add(Restrictions.eq("userName",userName));
+		
+		@SuppressWarnings("unchecked")
+		List<UserDetails> listUser = (List<UserDetails>) c.list();
+		
+		if (listUser != null && !listUser.isEmpty()) {
+			return listUser.get(0);
+		}
+		else {
+			return null;
+		}
+	}
+
+}

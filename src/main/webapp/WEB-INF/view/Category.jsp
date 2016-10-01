@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -35,6 +36,7 @@ th {
 </head>
 <body>
 <h3>Category</h3><br>
+ 
 <!------<c:url var="action" value="addcategory"></c:url>
 <form:form  action="${action}" commandName="category">
 Id:<form:input path="id"/>
@@ -59,8 +61,8 @@ Id:<form:input path="id"/>
 		<c:out value="${category.description}"/>
 		</c:forEach>---->
 		
- <c:url var="updateaction" value="updatecategory"></c:url>
-<form:form action="${updateaction}" modelAttribute="category">
+ <c:url var="action" value="updatecategory"></c:url>
+<form:form action="${action}" modelAttribute="category">
 	    ID:<form:input path="id"/>
 		Name:<form:input path="name" />
       Description:<form:input path="description" /> 
@@ -96,3 +98,4 @@ Id:<form:input path="id"/>
 </table>
 </body>
 </html>
+

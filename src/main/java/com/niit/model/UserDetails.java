@@ -1,6 +1,8 @@
 package com.niit.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
@@ -9,20 +11,24 @@ import org.springframework.stereotype.Component;
 @Table
 @Component
 public class UserDetails {
+	
 	@Id
-	private int id;
+	@GeneratedValue
+	@Column(name = "userId")
+	private int userId;
 	private String name;
+	
+	private String userName;
 	private String password;
-	private String mail;
-	private String contact;
-	private String address;
-	private String description;
+	private String mobile;
+	private String email;
 	private String role;
-	public int getId() {
-		return id;
+	private String enabled;
+	public int getUserId() {
+		return userId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getName() {
 		return name;
@@ -30,35 +36,29 @@ public class UserDetails {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getMail() {
-		return mail;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
-	public String getContact() {
-		return contact;
+	public String getEmail() {
+		return email;
 	}
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getRole() {
 		return role;
@@ -66,5 +66,13 @@ public class UserDetails {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public String getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}
+	
 	
 }
+	

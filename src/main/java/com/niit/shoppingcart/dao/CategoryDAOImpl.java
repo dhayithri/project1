@@ -1,4 +1,6 @@
+
 package com.niit.shoppingcart.dao;
+
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -9,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.model.Category;
-import com.niit.model.Supplier;
+
 
 
 @EnableTransactionManagement
@@ -27,7 +29,7 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 	//save or update - if the record exist, it will update
 	//                 - if the record does not exist it will create
 	@Transactional
-	public boolean saveOrUpdate(Category category){
+	public boolean save(Category category){
 		try {
 		sessionFactory.getCurrentSession().save(category);
 		return true;
@@ -37,7 +39,7 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 		}
 		
 	}
-	/***@Transactional
+	@Transactional
 	public boolean update(Category category){
 		try {
 		sessionFactory.getCurrentSession().update(category);
@@ -46,7 +48,7 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 			e.printStackTrace();
 			return false;
 		}
-	}**/
+	}
 	
 	@Transactional
 		public boolean delete(Category category){
@@ -80,7 +82,7 @@ public   class CategoryDAOImpl  implements CategoryDAO{
 			String hql = "from Category";
 			Query<Category> query = sessionFactory.getCurrentSession().createQuery(hql);
 			return query.list();
-		}
+	}
 }
 
 

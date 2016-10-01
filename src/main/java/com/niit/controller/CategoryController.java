@@ -23,7 +23,7 @@ public class CategoryController {
 
 	@RequestMapping(value="updatecategory")
 	public String updatecategory(@ModelAttribute("category") Category category,Model m){
-		categoryDAO.saveOrUpdate(category);
+		categoryDAO.update(category);
 		return "redirect:/Category";
 	}
 @RequestMapping(value ="Category" )
@@ -46,3 +46,4 @@ public String CategoryPagedelete(@ModelAttribute("category") Category category,M
 	return "redirect:/Category";
 }
 }
+

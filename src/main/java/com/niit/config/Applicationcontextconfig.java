@@ -12,10 +12,13 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.model.Cart;
 import com.niit.model.Category;
 import com.niit.model.Product;
 import com.niit.model.Supplier;
 import com.niit.model.UserDetails;
+import com.niit.shoppingcart.dao.CartDAO;
+import com.niit.shoppingcart.dao.CartDAOImpl;
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.CategoryDAOImpl;
 import com.niit.shoppingcart.dao.ProductDAO;
@@ -54,6 +57,7 @@ public class Applicationcontextconfig {
 		sessionBuilder.addAnnotatedClass(Supplier.class);
 		sessionBuilder.addAnnotatedClass(Product.class);
 		sessionBuilder.addAnnotatedClass(UserDetails.class);
+		sessionBuilder.addAnnotatedClasses(Cart.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 	
@@ -84,8 +88,12 @@ public class Applicationcontextconfig {
 		return new ProductDAOImpl(sessionFactory);
 
 	}
-
-		
+	@Autowired
+	@Bean(name = "cartDAO")
+	public CartDAO getCartDAO(SessionFactory sessionFactory) {
+			return new CartDAOImpl(sessionFactory);
+}
+	
 	}
 	
 

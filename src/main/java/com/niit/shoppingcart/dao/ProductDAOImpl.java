@@ -1,3 +1,4 @@
+
 package com.niit.shoppingcart.dao;
 
 import java.util.List;
@@ -89,6 +90,13 @@ public class   ProductDAOImpl implements ProductDAO{
 	
 			return false;
 		}
-			
-			
+		@Transactional
+		@SuppressWarnings("unchecked")
+		public List<Product> getproduct(int id) {
+			String hql="from Product where id= "+id;
+			@SuppressWarnings("rawtypes")
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			List<Product> listProduct = (List<Product>) query.list();
+			return listProduct;
 		}
+}
