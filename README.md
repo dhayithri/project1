@@ -1,4 +1,4 @@
- # ONLINE EMPORIUM - NIIT Project ①
+ ##  ONLINE EMPORIUM - NIIT Project ①
 
 This Ecommerce project is built using Spring, Hibernate ORM and Spring security consisting of basic funtionality like
 - New user registrations
